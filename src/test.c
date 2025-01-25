@@ -5,10 +5,18 @@
 #include "args.h"
 
 int same_image(image a, image b){
-    int i;
+    int i = 0;
     if(a.w != b.w || a.h != b.h || a.c != b.c) return 0;
+
+    
     for(i = 0; i < a.w*a.h*a.c; ++i){
-//if(!within_eps(a.data[i], b.data[i])) printf("%d %f %f\n", i, a.data[i], b.data[i]);
+        if(!within_eps(a.data[i], b.data[i])) {
+         printf("%d %f %f\n", i, a.data[443121], b.data[443121]);
+    printf("%d %f %f\n", i, a.data[443122], b.data[443122]);
+    printf("%d %f %f\n", i, a.data[443123], b.data[443123]);
+    printf("%d %f %f\n", i, a.data[443124], b.data[443124]);   
+            printf("%d %f %f\n", i, a.data[i], b.data[i]);
+        }
         if(!within_eps(a.data[i], b.data[i])) return 0;
     }
     return 1;
@@ -76,6 +84,8 @@ void test_rgb_to_hsv()
     image im = load_image("data/dog.jpg");
     rgb_to_hsv(im);
     image hsv = load_image("figs/dog.hsv.png");
+    // printf("%f, %f, %f", get_pixel(hsv, 0, 0, 0), get_pixel(hsv, 0, 0, 1),get_pixel(hsv, 0, 0, 2));
+
     TEST(same_image(im, hsv));
 }
 
